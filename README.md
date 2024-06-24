@@ -6,4 +6,5 @@ Module unit test with [Terratest](https://github.com/gruntwork-io/terratest) and
 
 ```bash
 go test -v -timeout 30m -run TestLambdaExample
+go test -v -timeout 30m -run TestLambdaApiGatewayExample
 ```
