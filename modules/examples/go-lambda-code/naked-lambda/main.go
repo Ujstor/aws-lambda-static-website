@@ -9,14 +9,12 @@ import (
 )
 
 func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	htmlBody := "<html><body><h1>Hello, World!</h1></body></html>"
-
 	return events.APIGatewayProxyResponse{
 		StatusCode: http.StatusOK,
 		Headers: map[string]string{
-			"Content-Type": "text/html",
+			"Content-Type": "text/plain",
 		},
-		Body: htmlBody,
+		Body: "Hello, World!",
 	}, nil
 }
 

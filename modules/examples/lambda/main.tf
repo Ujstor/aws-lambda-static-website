@@ -6,7 +6,7 @@ module "lambda_web" {
   }
 
   lambda_config = {
-    work_dir          = "../go-lambda-code/web-test/"
+    work_dir          = "../go-lambda-code/naked-lambda/"
     bin_name          = "bootstrap"
     archive_bin_name  = "function.zip"
     handler           = "main"
@@ -26,4 +26,6 @@ module "lambda_iam_role" {
   providers = {
     aws = aws.snadbox
   }
+
+  iam_lambda_role_name = var.environment
 }

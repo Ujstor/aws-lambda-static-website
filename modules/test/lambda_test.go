@@ -26,7 +26,7 @@ func TestLambdaExample(t *testing.T) {
 
 	lambdaUrl := terraform.OutputRequired(t, opts, "invoke_url")
 	url := fmt.Sprint(lambdaUrl)
-	maxRetries := 10
+	maxRetries := 3
 	timeBetweenRetries := 10 * time.Second
 
 	http_helper.HttpGetWithRetryWithCustomValidation(

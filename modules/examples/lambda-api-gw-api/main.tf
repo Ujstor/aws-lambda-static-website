@@ -1,4 +1,4 @@
-module "lambda_web_api_gw" {
+module "lambda_api" {
   source = "../../modules/lambda/"
 
   providers = {
@@ -6,7 +6,7 @@ module "lambda_web_api_gw" {
   }
 
   lambda_config = {
-    work_dir          = "../go-lambda-code/web-test/"
+    work_dir          = "../go-lambda-code/api-test/"
     bin_name          = "bootstrap"
     archive_bin_name  = "function.zip"
     handler           = "main"
@@ -16,7 +16,6 @@ module "lambda_web_api_gw" {
   }
 
   function_name   = var.environment
-  public_url      = false
   lambda_iam_role = module.lambda_iam_role.lambda_iam_role__arn
 }
 
@@ -31,7 +30,7 @@ module "api_gateway" {
     integration_type                  = "AWS_PROXY"
     integration_method                = "POST"
     connection_type                   = "INTERNET"
-    route_key                         = "GET /{proxy+}"
+    route_key                         = "POST /{proxy+}"
     statement_id                      = "AllowExecutionFromAPIGateway"
     action                            = "lambda:InvokeFunction"
     principal                         = "apigateway.amazonaws.com"
@@ -41,9 +40,9 @@ module "api_gateway" {
     authorizer_payload_format_version = "1.0"
   }
 
-  lambda_func_name  = module.lambda_web_api_gw.lambda_arn.lambda_name
-  lambda_invoke_arn = module.lambda_web_api_gw.lambda_arn.lambda_arn
-  authorizer_uri    = module.lambda_web_api_gw.lambda_arn.invoke_arn
+  lambda_func_name  = module.lambda_api.lambda_arn.lambda_name
+  lambda_invoke_arn = module.lambda_api.lambda_arn.lambda_arn
+  authorizer_uri    = module.lambda_api.lambda_arn.invoke_arn
 
   api_gw_conf = {
     name          = var.environment
@@ -58,4 +57,6 @@ module "lambda_iam_role" {
   providers = {
     aws = aws.snadbox
   }
+
+  iam_lambda_role_name = var.environment
 }

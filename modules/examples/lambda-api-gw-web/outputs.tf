@@ -1,6 +1,6 @@
 output "lambda_web" {
   description = "Lambda ARN-s and name"
-  value       = module.lambda_web_api_gw.lambda_arn
+  value       = module.lambda_web.lambda_arn
 }
 
 output "api_gateway_url" {

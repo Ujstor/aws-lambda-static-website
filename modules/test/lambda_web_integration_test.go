@@ -11,13 +11,13 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestLambdaApiGatewayExample(t *testing.T) {
+func TestLambdaWebExample(t *testing.T) {
 	t.Parallel()
 
 	opts := &terraform.Options{
-		TerraformDir: "../examples/lambda-api-gateway/",
+		TerraformDir: "../examples/lambda-api-gw-web/",
 		Vars: map[string]interface{}{
-			"environment": fmt.Sprintf("sandbox-integration-test-%s", random.UniqueId()),
+			"environment": fmt.Sprintf("web-integration-test-%s", random.UniqueId()),
 		},
 	}
 
@@ -26,7 +26,7 @@ func TestLambdaApiGatewayExample(t *testing.T) {
 
 	lambdaUrl := terraform.OutputRequired(t, opts, "api_gateway_url")
 	url := fmt.Sprint(lambdaUrl)
-	maxRetries := 10
+	maxRetries := 3
 	timeBetweenRetries := 10 * time.Second
 
 	http_helper.HttpGetWithRetryWithCustomValidation(
@@ -36,8 +36,13 @@ func TestLambdaApiGatewayExample(t *testing.T) {
 		maxRetries,
 		timeBetweenRetries,
 		func(status int, body string) bool {
-			return status == 200 &&
-				strings.Contains(body, "Hello, World!")
+			if status != 200 {
+				return false
+			}
+
+			normalizedBody := strings.ToLower(body)
+			expected := "<h1>hello, world!</h1>"
+			return strings.Contains(normalizedBody, expected)
 		},
 	)
 }
