@@ -24,7 +24,7 @@ func TestLambdaApiExample(t *testing.T) {
 	opts := &terraform.Options{
 		TerraformDir: "../examples/lambda-api-gw-api/",
 		Vars: map[string]interface{}{
-			"environment": fmt.Sprintf("sandbox-integration-test-%s", random.UniqueId()),
+			"environment": fmt.Sprintf("sandbox-integrationAPI-test-%s", random.UniqueId()),
 		},
 	}
 
@@ -44,6 +44,12 @@ func TestLambdaApiExample(t *testing.T) {
 	registerUrl := fmt.Sprintf("%s/register", url)
 	loginUrl := fmt.Sprintf("%s/login", url)
 
+	time.Sleep(15 * time.Second)
+	registerAndLogin(t, registerUrl, loginUrl, testUser)
+
+}
+
+func registerAndLogin(t *testing.T, registerUrl, loginUrl string, testUser User) {
 	// Register User
 	registerResponse := sendHttpPostRequest(t, registerUrl, testUser)
 	assert.Equal(t, http.StatusCreated, registerResponse.StatusCode, "Expected 201 Created status for user registration")

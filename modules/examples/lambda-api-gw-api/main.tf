@@ -2,7 +2,7 @@ module "lambda_api" {
   source = "../../modules/lambda/"
 
   providers = {
-    aws = aws.snadbox
+    aws = aws.sandbox
   }
 
   lambda_config = {
@@ -23,14 +23,14 @@ module "api_gateway" {
   source = "../../modules/api-gateway-lambda"
 
   providers = {
-    aws = aws.snadbox
+    aws = aws.sandbox
   }
 
   lambda_integration_route_premission = {
     integration_type                  = "AWS_PROXY"
     integration_method                = "POST"
     connection_type                   = "INTERNET"
-    route_key                         = "POST /{proxy+}"
+    route_key                         = "ANY /{proxy+}"
     statement_id                      = "AllowExecutionFromAPIGateway"
     action                            = "lambda:InvokeFunction"
     principal                         = "apigateway.amazonaws.com"
@@ -55,7 +55,7 @@ module "lambda_iam_role" {
   source = "../../modules/roles/lambda-role/"
 
   providers = {
-    aws = aws.snadbox
+    aws = aws.sandbox
   }
 
   iam_lambda_role_name = var.environment

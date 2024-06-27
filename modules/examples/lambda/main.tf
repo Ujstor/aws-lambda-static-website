@@ -2,7 +2,7 @@ module "lambda_web" {
   source = "../../modules/lambda/"
 
   providers = {
-    aws = aws.snadbox
+    aws = aws.sandbox
   }
 
   lambda_config = {
@@ -24,7 +24,7 @@ module "lambda_iam_role" {
   source = "../../modules/roles/lambda-role/"
 
   providers = {
-    aws = aws.snadbox
+    aws = aws.sandbox
   }
 
   iam_lambda_role_name = var.environment
