@@ -78,7 +78,7 @@ This module expects the provided Go binary to be configured specifically to work
 The Go binary should include all necessary dependencies and configurations.
 The best way is to use a templ with embedded FS that is compiled into the binary.
 Below is an example of Go code necessary to work with AWS Lambda.
-You can also check implem in the [examples](./modules/examples/go-lambda-code/complete-website/) directory.
+You can also check implementation in this [examples](https://github.com/Ujstor/portfolio-web/tree/lambda).
 
 ### main
 
