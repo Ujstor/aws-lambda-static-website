@@ -5,5 +5,5 @@ output "vpc_id" {
 
 output "public_subnet_ids" {
   description = "Public subnet ids to pass to the module"
-  value       = [for pub_subnet in aws.aws_subnet.public_subnet : pub_subnet]
+  value       = aws_subnet.public_subnet[*].id
 }

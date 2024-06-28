@@ -1,5 +1,4 @@
-output "pub_subnet_id" {
-  description = "public subnet ids"
-  value       = vcp_subnet.publuc_subnet_ids
+output "pub_subnet_ips" {
+  description = "public subnet ips"
+  value       = module.nat_eip.public_subnet_ips
 }
-

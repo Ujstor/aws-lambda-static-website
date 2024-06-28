@@ -36,7 +36,6 @@ variable "public_subnet_cidr_blocks" {
     "10.0.22.0/24",
     "10.0.23.0/24",
     "10.0.24.0/24"
-
   ]
 }
 
@@ -79,9 +78,4 @@ variable "private_subnet_cidr_blocks" {
 variable "private_subnet_count" {
   description = "Number of private subnets"
   type        = number
-}
-
-variable "name" {
-  description = "Name of internet gateway"
-  type        = string
 }
