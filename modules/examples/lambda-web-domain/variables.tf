@@ -4,6 +4,12 @@ variable "cloudflare_api_token" {
   sensitive   = true
 }
 
+variable "sub_account_role_arn" {
+  description = "Organization subaccount for testing"
+  type        = string
+  default     = "arn:aws:iam::730335647984:role/OrganizationAccountAccessRole"
+}
+
 variable "cloudflare_zone_id" {
   description = "Cloudflare zone id"
   type        = string

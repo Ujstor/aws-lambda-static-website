@@ -17,7 +17,7 @@ provider "aws" {
   alias  = "sandbox"
 
   assume_role {
-    role_arn = "arn:aws:iam::730335647984:role/OrganizationAccountAccessRole"
+    role_arn = var.sub_account_role_arn
   }
 }
 
