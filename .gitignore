@@ -52,3 +52,6 @@ bootstrap
 *.zip
 
 .auto.tfvars
+
+tfsec.sarif
+terrasca*
