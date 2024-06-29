@@ -54,4 +54,3 @@ bootstrap
 .auto.tfvars
 
 tfsec.sarif
-terrasca*
