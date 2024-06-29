@@ -26,7 +26,7 @@ jobs:
         go install github.com/aquasecurity/tfsec/cmd/tfsec@latest
 
     - name: Run tfsec
-      run: tfsec --soft-fail --out tfsec.sarif
+      run: tfsec --soft-fail --format sarif --out tfsec.sarif
 
     - uses: github/codeql-action/upload-sarif@v3
       if: github.ref == 'refs/heads/master'
