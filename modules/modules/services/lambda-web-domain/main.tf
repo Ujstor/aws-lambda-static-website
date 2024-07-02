@@ -83,6 +83,22 @@ module "lambda_iam_role" {
   iam_lambda_role_name = var.lambda_func_name
 }
 
+
+module "lambda_cloudWatch_iam_role" {
+  source = "../../roles/lambda-cloudWatch/"
+
+  providers = {
+    aws = aws.sandbox
+  }
+
+  lambda_iam_role_name = module.lambda_iam_role.lambda_iam_role_name
+
+  iam_lambda_cloudwatch_name = var.lambda_func_name
+  function_name              = var.lambda_func_name
+
+  depends_on = [module.lambda_iam_role]
+}
+
 resource "cloudflare_record" "api_gw_domain" {
   zone_id = var.cloudflare_zone_id
   name    = module.acm.CNAME_records[0].name

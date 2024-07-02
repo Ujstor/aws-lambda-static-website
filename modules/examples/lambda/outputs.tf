@@ -1,10 +1,10 @@
-output "lambda_web" {
+output "lambda_arn" {
   description = "Lambda ARN-s and name"
-  value       = module.lambda_web.lambda_arn
+  value       = module.lambda.lambda_arn
 }
 
 output "invoke_url" {
   description = "Invoke URL"
-  value       = module.lambda_web.invoke_url
+  value       = module.lambda.invoke_url
 }
 
