@@ -42,7 +42,7 @@ resource "aws_apigatewayv2_stage" "lambda" {
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.lambda_api.name}"
+  name = "/aws/vendedlogs/api_gw/${aws_apigatewayv2_api.lambda_api.name}"
 
   retention_in_days = 30
 }

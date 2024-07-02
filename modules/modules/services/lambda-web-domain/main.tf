@@ -46,7 +46,7 @@ module "lambda_web" {
   }
 
   function_name   = var.lambda_func_name
-  lambda_iam_role = module.lambda_iam_role.lambda_iam_role__arn
+  lambda_iam_role = module.lambda_iam_role.lambda_iam_role_arn
 }
 
 module "api_gateway" {
@@ -86,10 +86,6 @@ module "lambda_iam_role" {
 
 module "lambda_cloudWatch_iam_role" {
   source = "../../roles/lambda-cloudWatch/"
-
-  providers = {
-    aws = aws.sandbox
-  }
 
   lambda_iam_role_name = module.lambda_iam_role.lambda_iam_role_name
 

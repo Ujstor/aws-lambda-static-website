@@ -16,7 +16,7 @@ module "lambda_api" {
   }
 
   function_name   = var.environment
-  lambda_iam_role = module.lambda_iam_role.lambda_iam_role__arn
+  lambda_iam_role = module.lambda_iam_role.lambda_iam_role_arn
 }
 
 module "api_gateway" {
@@ -49,6 +49,8 @@ module "api_gateway" {
     protocol_type = "HTTP"
   }
 
+  depends_on = [module.lambda_api]
+
 }
 
 module "lambda_iam_role" {
@@ -59,4 +61,19 @@ module "lambda_iam_role" {
   }
 
   iam_lambda_role_name = var.environment
+}
+
+module "lambda_cloudWatch_iam_role" {
+  source = "../../modules/roles/lambda-cloudWatch/"
+
+  providers = {
+    aws = aws.sandbox
+  }
+
+  lambda_iam_role_name = module.lambda_iam_role.lambda_iam_role_name
+
+  iam_lambda_cloudwatch_name = var.environment
+  function_name              = var.environment
+
+  depends_on = [module.lambda_iam_role]
 }

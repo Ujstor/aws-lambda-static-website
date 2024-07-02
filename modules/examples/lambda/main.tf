@@ -17,7 +17,7 @@ module "lambda" {
 
   function_name   = var.environment
   public_url      = true
-  lambda_iam_role = module.lambda_iam_role.lambda_iam_role__arn
+  lambda_iam_role = module.lambda_iam_role.lambda_iam_role_arn
 
   depends_on = [module.lambda_iam_role, module.lambda_cloudWatch_iam_role]
 }
